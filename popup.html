@@ -1,28 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>HungerStation Scraper</title>
-  <style>
-    body {
-      width: 200px;
-      padding: 10px;
-      font-family: Arial, sans-serif;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HungerStation Scraper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
+        }
+
+        nav {
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            color: #10b981;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        main {
+            max-width: 64rem;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.75rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .description {
+            color: #4b5563;
+            font-size: 1.25rem;
+            max-width: 42rem;
+            margin: 0 auto 4rem;
+        }
+
+        .scrape-button {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .scrape-button:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .down-arrow {
+            margin-top: 2rem;
+            color: #10b981;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
 </head>
 <body>
-  <button id="scrape-button">Scrape Menu</button>
-  <script src="popup.js"></script>
+    <nav>
+        <div class="logo">
+            <img src="https://onshobbak.com/assets/logo-6fdb88121fcbb1073c4b819b3663bbd2c53dc6f5f8247246902f0a5632dc6833.svg" alt="Logo" width="134" >
+        </div>
+    </nav>
+
+    <main>
+        <h1>HungerStation Scraper</h1>
+        <p class="description">
+            Easily extract menu data from HungerStation restaurants with our powerful scraping tool
+        </p>
+        <button id="scrape-button" class="scrape-button">Scrape Menu</button>
+        <script src="popup.js"></script>
+        <div class="down-arrow">↓</div>
+    </main>
+
+    <footer>
+        © ALL COPYRIGHT RESERVED TO SUPERPOWERS
+    </footer>
 </body>
 </html>
