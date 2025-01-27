@@ -3,121 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HungerStation Scraper</title>
+    <title>Hunger Station Scraper</title>
     <style>
+        :root {
+            --primary-yellow: #FFE600;
+            --primary-brown: #4A2511;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
+            width: 300px;
+            height: 400px;
+            background-color: var(--primary-yellow);
+            overflow: hidden;
+            position: relative;
         }
 
-        nav {
-            padding: 1rem 1.5rem;
+        .wave-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: var(--primary-brown);
+            border-bottom-left-radius: 100% 50%;
+            border-bottom-right-radius: 100% 50%;
+        }
+
+        .wave-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: var(--primary-brown);
+            border-top-left-radius: 100% 50%;
+            border-top-right-radius: 100% 50%;
         }
 
         .logo {
-            color: #10b981;
-            font-size: 1.5rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary-yellow);
+            border: 3px solid var(--primary-brown);
+            border-radius: 12px;
+            padding: 8px 16px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: var(--primary-brown);
+            font-size: 14px;
         }
 
-        main {
-            max-width: 64rem;
-            margin: 0 auto;
-            padding: 3rem 1rem;
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
             text-align: center;
         }
 
         h1 {
-            font-size: 3.75rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .description {
-            color: #4b5563;
-            font-size: 1.25rem;
-            max-width: 42rem;
-            margin: 0 auto 4rem;
+            color: var(--primary-brown);
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.2;
         }
 
         .scrape-button {
-            background-color: #10b981;
-            color: white;
-            border: none;
-            padding: 1.5rem 3rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-            border-radius: 9999px;
+            background-color: var(--primary-yellow);
+            border: 3px solid var(--primary-brown);
+            border-radius: 25px;
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-brown);
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            margin-top: 20px;
+            transition: transform 0.2s;
         }
 
         .scrape-button:hover {
-            background-color: #059669;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
         }
 
-        .down-arrow {
-            margin-top: 2rem;
-            color: #10b981;
-            font-size: 2rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(10px);
-            }
-        }
-
-        footer {
+        .footer {
             position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 1rem;
+            bottom: 20px;
+            left: 0;
+            right: 0;
             text-align: center;
-            color: #6b7280;
-            font-size: 0.875rem;
+            color: var(--primary-yellow);
+            font-size: 10px;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <img src="https://onshobbak.com/assets/logo-6fdb88121fcbb1073c4b819b3663bbd2c53dc6f5f8247246902f0a5632dc6833.svg" alt="Logo" width="134" >
-        </div>
-    </nav>
-
-    <main>
-        <h1>HungerStation Scraper</h1>
-        <p class="description">
-            Easily extract menu data from HungerStation restaurants with our powerful scraping tool
-        </p>
+    <div class="wave-top"></div>
+    <!-- <div class="logo">HUNGER STATION</div> -->
+    
+    <div class="content">
+        <h1>HUNGER<br>STATION<br>SCRAPER</h1>
+        <!-- <button class="scrape-button">Scrape Menu</button> -->
         <button id="scrape-button" class="scrape-button">Scrape Menu</button>
         <script src="popup.js"></script>
-        <div class="down-arrow">↓</div>
-    </main>
+    </div>
 
-    <footer>
-        © ALL COPYRIGHT RESERVED TO SUPERPOWERS
-    </footer>
+    <div class="footer">© ALL COPYRIGHT RESERVED TO SUPERPOWERS</div>
+    <div class="wave-bottom"></div>
 </body>
 </html>
