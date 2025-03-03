@@ -47,19 +47,6 @@
             border-top-right-radius: 100% 50%;
         }
 
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: var(--primary-yellow);
-            border: 3px solid var(--primary-brown);
-            border-radius: 12px;
-            padding: 8px 16px;
-            font-weight: bold;
-            color: var(--primary-brown);
-            font-size: 14px;
-        }
-
         .content {
             display: flex;
             flex-direction: column;
@@ -95,6 +82,44 @@
             transform: scale(1.05);
         }
 
+        /* New Spinning Dots Loader */
+        .loading-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .loading-spinner div {
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-brown);
+            border-radius: 50%;
+            position: absolute;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) translate(20px) rotate(0deg); }
+            100% { transform: rotate(360deg) translate(20px) rotate(-360deg); }
+        }
+
+        .loading-spinner div:nth-child(1) { animation-delay: 0s; }
+        .loading-spinner div:nth-child(2) { animation-delay: 0.1s; }
+        .loading-spinner div:nth-child(3) { animation-delay: 0.2s; }
+        .loading-spinner div:nth-child(4) { animation-delay: 0.3s; }
+        .loading-spinner div:nth-child(5) { animation-delay: 0.4s; }
+        .loading-spinner div:nth-child(6) { animation-delay: 0.5s; }
+        .loading-spinner div:nth-child(7) { animation-delay: 0.6s; }
+        .loading-spinner div:nth-child(8) { animation-delay: 0.7s; }
+
         .footer {
             position: absolute;
             bottom: 20px;
@@ -109,16 +134,23 @@
 </head>
 <body>
     <div class="wave-top"></div>
-    <!-- <div class="logo">HUNGER STATION</div> -->
-    
+
     <div class="content">
         <h1>HUNGER<br>STATION<br>SCRAPER</h1>
-        <!-- <button class="scrape-button">Scrape Menu</button> -->
         <button id="scrape-button" class="scrape-button">Scrape Menu</button>
-        <script src="popup.js"></script>
+
+        <!-- Loader -->
+        <div class="loading-container" id="loading-container">
+            <div class="loading-spinner">
+                <div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div>
+            </div>
+        </div>
     </div>
 
     <div class="footer">© ALL COPYRIGHT RESERVED TO SUPERPOWERS</div>
     <div class="wave-bottom"></div>
+
+    <script src="popup.js"></script>
 </body>
 </html>

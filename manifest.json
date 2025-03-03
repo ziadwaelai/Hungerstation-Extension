@@ -3,7 +3,8 @@
     "name": "HungerStation Scraper",
     "version": "1.0",
     "description": "Scrape menu data from HungerStation. This extension will scrape the menu data from HungerStation and save it in a CSV file",
-    "permissions": ["activeTab", "scripting", "downloads"],
+    "permissions": ["activeTab", "scripting", "downloads", "storage"],
+    "host_permissions": ["<all_urls>"],
     "action": {
       "default_popup": "popup.html",
       "default_icon": {

@@ -1,42 +1,55 @@
-// ZEE
 document.getElementById("scrape-button").addEventListener("click", () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  const scrapeButton = document.getElementById("scrape-button");
+  const loadingContainer = document.getElementById("loading-container");
+
+  // Disable button and show loading animation
+  scrapeButton.disabled = true;
+  scrapeButton.innerText = "Scraping...";
+  loadingContainer.style.display = "block";
+
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       chrome.tabs.sendMessage(tabs[0].id, { action: "scrape" }, (response) => {
-        if (response && response.data) {
-          // Convert data to CSV
-          const csv = convertToCSV(response.data);
-  
-          // Create a Blob and trigger the download
-          const blob = new Blob([csv], { type: "text/csv" });
-          const url = URL.createObjectURL(blob);
-  
-          // Create a temporary link to trigger the download
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "menu_items.csv";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-  
-          alert("Data scraped and downloaded successfully!");
-        } else {
-          alert("Failed to scrape data.");
-        }
+          if (response && response.data.length > 0) {
+              sendDataToFlask(response.sheetName, response.data);
+          } else {
+              alert("Failed to scrape data.");
+              resetUI();
+          }
       });
-    });
   });
-  
-  // Helper function to convert JSON to CSV
-  function convertToCSV(data) {
-    const headers = ["Title", "Description", "Price", "Image"];
-    const rows = data.map((item) => {
-      return [
-        `"${item.title || ""}"`,
-        `"${item.description || ""}"`,
-        `"${item.price || ""}"`,
-        `"${item.image || ""}"`,
-      ].join(",");
-    });
-  
-    return [headers.join(","), ...rows].join("\n");
+});
+
+async function sendDataToFlask(sheetName, data) {
+  const flaskUrl = "http://127.0.0.1:5000/create-sheet"; // Flask server URL
+
+  try {
+      const response = await fetch(flaskUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sheet_name: sheetName, values: data })
+      });
+
+      const result = await response.json();
+      console.log("Flask Response:", result);
+
+      if (result.status === "success" && result.sheetUrl) {
+          chrome.tabs.create({ url: result.sheetUrl }); // Open the new Google Sheet
+      } else {
+          alert("Error: " + result.message);
+      }
+  } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to send data to Flask. Is the server running?");
+  } finally {
+      resetUI(); // Reset UI after request is complete
   }
+}
+
+function resetUI() {
+  const scrapeButton = document.getElementById("scrape-button");
+  const loadingContainer = document.getElementById("loading-container");
+
+  scrapeButton.disabled = false;
+  scrapeButton.innerText = "Scrape Menu";
+  loadingContainer.style.display = "none";
+}
