@@ -7,4 +7,3 @@ google-api-python-client
 langchain-openai
 langchain-core
 python-dotenv
-concurrent.futures
