@@ -19,7 +19,7 @@ function scrapeData(mode) {
 }
 
 async function sendDataToFlask(mode, sheetName, data) {
-    const flaskUrl = "http://127.0.0.1:5000/create-sheet"; // Flask server URL
+    const flaskUrl = "http://128.140.37.194:5001/create-sheet"; // Flask server URL
 
     // Modify data based on selected mode
     if (mode === "products-only") {
